@@ -74,7 +74,7 @@ class AuthService implements AuthInterface {
         try {
             $user = Socialite::driver('google')->user();
             $findUser = User::where('google_id', $user->id)->first();
-            // dd($findUser);
+
             if (!is_null($findUser)){ 
               return response()->json([
                 'status' => 'success',
@@ -93,7 +93,7 @@ class AuthService implements AuthInterface {
               ]);     
             }
         }catch (\Exception $e) {
-            dd($e->getMessage());
+            return $e->getMessage();
         }
     }
 }
